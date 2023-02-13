@@ -18,18 +18,7 @@ public class RegistryFile extends XMLFiles {
         super(path);
     }
 
-    void createFile() {
-        Element rootElem = doc.createElement("root");
-        Element emptyDb = this.addDbEntry("empty", "true");
 
-        rootElem.appendChild(emptyDb);
-        doc.appendChild(rootElem);
-
-        new DatabaseFile(this.getDatabasePath("empty", true));
-        this.updateFile();
-
-        System.out.println("Intialized: " + xmlFile.getPath());
-    }
 
     /**
      * 

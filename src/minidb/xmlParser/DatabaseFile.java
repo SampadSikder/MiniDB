@@ -19,17 +19,7 @@ public class DatabaseFile extends XMLFiles {
         super(path);
     }
 
-    protected void createFile() {
-        Element rootElem = doc.createElement("Xroot");
-        Element meta = doc.createElement(TAG_META);
-        Element data = doc.createElement(TAG_STORAGE);
 
-        rootElem.appendChild(meta);
-        rootElem.appendChild(data);
-        doc.appendChild(rootElem);
-
-        this.updateFile();
-    }
 
     public void EditMode() {
         metaElem = (Element) doc.getElementsByTagName(TAG_META).item(0);

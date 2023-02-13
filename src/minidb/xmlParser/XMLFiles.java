@@ -17,7 +17,7 @@ import constants.constants;
  */
 public abstract class XMLFiles {
     protected File xmlFile;
-    protected Document doc;
+    private static Transformer transformer instance = null;
 
     public XMLFiles(String path) {
         try {
@@ -39,18 +39,17 @@ public abstract class XMLFiles {
             createFile(); // abstract method to create the file
         } else {
             doc = docBuilder.parse(xmlFile);
-            ;
         }
     }
 
-    abstract void createFile();
+
 
     /**
      * Call this method to update the XML file.
      */
     protected void updateFile() {
         try {
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            Transformer transformer = getTransformer();
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             transformer.setOutputProperty(OutputKeys.INDENT, "no");
             transformer.setOutputProperty(OutputKeys.METHOD, "xml");
@@ -64,8 +63,16 @@ public abstract class XMLFiles {
             err.printStackTrace();
         }
     }
+    public void getTransformer(){
+        if(instance!=null){
+            return this.instance;
+        }
+        instance = TransformerFactory.newInstance().newTransformer();
+        return this.instance;
+    }
 
     protected void print(String x) {
         System.out.println(x);
     }
 }
+
